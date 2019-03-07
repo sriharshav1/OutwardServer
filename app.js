@@ -1,7 +1,35 @@
-const express = require('express')
+const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type,Accept,Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
+});
 var userCount=0;
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
+
+app.get('/add', function (req, res) {
+console.log("in post");
+
+//let searchParams = new URLSearchParams(url.search);
+//console.log(searchParams.get('c')); 
+
+ let value1 = req.query.value1;
+ let value2 = req.query.value2;
+ //searchParams.get('value1');
+ //let value2 = searchParams.get('value2');
+ console.log(Number(value1) + Number(value2));
+ res.json({ result: Number(value1) + Number(value2) });
+
+});
 
 app.get('/', (req, res) => {
     userCount++;
