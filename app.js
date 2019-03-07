@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express();
 var userCount=0;
+const PORT = process.env.PORT || 3000;
+
 app.get('/', (req, res) => {
     userCount++;
     //res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -14,6 +16,6 @@ app.get('/name', (req, res) => {
   res.send('hi john')
 });
 
-app.listen(8000, () => {
-  console.log('Example app listening on port 8000!')
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${ PORT }`);
 });
