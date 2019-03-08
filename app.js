@@ -16,6 +16,13 @@ app.use((req, res, next) => {
 var userCount=0;
 const PORT = process.env.PORT || 3001;
 
+app.get('/', function (req, res) {
+ 
+   
+   res.json({ result: userCount++ });
+  
+  });
+
 app.get('/add', function (req, res) {
 console.log("in post");
 
@@ -31,6 +38,29 @@ console.log("in post");
 
 });
 
+app.get('/sub', function (req, res) {
+  console.log("in post");
+   let value1 = req.query.value1;
+   let value2 = req.query.value2;
+   res.json({ result: Number(value1) - Number(value2) });
+  
+  });
+  app.get('/mul', function (req, res) {
+     let value1 = req.query.value1;
+     let value2 = req.query.value2;
+
+     console.log(Number(value1) * Number(value2));
+     res.json({ result: Number(value1) * Number(value2) });
+    
+    });
+    app.get('/div', function (req, res) {
+       let value1 = req.query.value1;
+       let value2 = req.query.value2;
+       let result=(Number(value1) / Number(value2)).toFixed(2)
+       console.log(result);
+       res.json({ result: result });
+      
+      });
 app.get('/', (req, res) => {
     userCount++;
     //res.writeHead(200, { 'Content-Type': 'text/plain' });
